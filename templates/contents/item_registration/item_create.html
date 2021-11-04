@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+  <form action='' method='POST' enctype="multipart/form-data">
+    <legend>アパレル登録機能</legend>{% csrf_token %}
+    {% bootstrap_form form %}
+    <input type = 'hidden' name = 'action' value = 'confirm'>
+    {% bootstrap_button button_type="submit" content="新規登録" %}
+  </form>
+  
+  <a href="{% url 'home' %}" type="submit">ホームに戻る</a>
+</div>
+
+{% endblock content %}
+
+{% if form.errors %}
+<div class="alert alert-danger">
+  <p>エラーが発生しました。</p>
+  {% endif %}
+  {% for field, error_list in form.errors.items %}
+  <p>{{ error_list }}</p>{% endfor %}
+</div>

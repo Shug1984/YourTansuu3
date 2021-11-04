@@ -1,0 +1,13 @@
+{% extends 'account/account_base.html' %}
+{%load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <form action ='' method='POST' enctype="multipart/form-data">
+        <h2>ユーザー情報の編集</h2>{% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="更新する" %}
+    </form>
+<a href="{% url 'user_information' request.user.pk %}" class="btn btn-outline-primary" type="submit">ユーザー情報に戻る</a>
+</div>
+{% endblock content %}

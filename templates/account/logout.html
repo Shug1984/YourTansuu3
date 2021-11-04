@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%load static django_bootstrap5 %}
+
+{% block content %}
+<h1>ログアウトページです</h1>
+<div class="container">
+    <h2>ログアウトしました</h2>
+    <a href="{% url 'top' %}" class="btn btn-outline-primary">トップに戻る</a>
+</div>
+{% endblock content %}

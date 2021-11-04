@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{%load static django_bootstrap5 humanize %}
+
+{% block content %}
+<h1>登録内容確認</h1>
+<div class="container">
+    <h2 class='title'>入力内容を確認してください</h2>
+    {% bootstrap_form form %}
+    <form action='.' method="post" enctype="multipart/form-data">{% csrf_token %}
+        {% for field in form %}
+        {{ field.as_hidden }}
+        {% endfor %}
+        <input type='hidden' name='action' value='complete'>
+        <input type="hidden" name="personal_image_base64" value="{{ personal_image_base64 }}" />
+        <button class="btn btn-outline-primary">登録する</button>
+    </form>
+    <form action='.' method="post" enctype="multipart/form-data">{% csrf_token %}
+        {% for field in form %}
+        {{ field.as_hidden }}
+        {% endfor %}
+        <input type='hidden' name='action' value='input'>
+        <button class="btn btn-outline-primary" style="margin-top: 10px;">入力ページに戻る</button>
+    </form>
+</div>
+{% endblock content %}
+
+
+<p>メールアドレス</p>{{ form.email.value }}
+    <p>パスワード</p>{{ form.password1.value }}
+    <p>パスワード確認</p>{{ form.password2.value }}
+    <p>姓</p>{{ form.last_name.value }}
+    <p>名</p>{{ form.first_name.value }}
+    <p>姓(カナ)</p>{{ form.last_kana.value }}
+    <p>名(カナ)</p>{{ form.first_kana.value }}
+    <p>住所</p>{{form.zip_code.value}}{{ form.instance.get_prefecture_display }}{{ form.city_name.value }}{{ form.street_name.value }}{{ form.building_name.value }}
+    <p>電話番号</p>{{ form.tel.value }}
+    <p>生年月日</p>{{ form.date_of_birth.value }}
+    <p>性別</p>{{ form.instance.get_gender_display }}
+    <p>アイテム画像</p>
+    <img src="{{ persoanl_image_base64 }}" style="max-width: 300px;" />
+    {{ form.personal_image.value }}
+    {% if form.personal_image.value == None %}
+    <img src="#" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+    {% endif %}

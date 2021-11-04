@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{%load static django_bootstrap5 %}
+
+{% block content %}
+<h1>登録完了</h1>
+<div class="container">
+    <h2 class='title'>新規登録を完了しました</h2>
+    <div style="text-align: center;">
+        <a href="{% url 'login' %}" class="btn btn-outline-primary">ログイン</a>
+    </div>
+</div>
+{% endblock content %}

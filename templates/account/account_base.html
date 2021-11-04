@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{%load static django_bootstrap5 humanize %}
+
+{% block header %}
+<div class="container">
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+                </a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">ホーム</a></li>
+                    <li><a href="{% url 'user_information' request.user.pk %}" class="nav-link px-2 text-white">ユーザー情報</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Navbar空き</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Navbar空き</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Navbar空き</a></li>
+                </ul>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                <div class="text-end">
+                    <a href="{% url 'logout' %}" class="btn btn-outline-light me-2">ログアウト</a>
+                    <a href="{% url 'top' %}" class="btn btn-warning">トップページ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+{% endblock header %}
+
+{% block footer %}
+<div class="b-example-divider"></div>
+
+<div class="container">
+  <footer class="p-3 bg-dark text-white">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">空き</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">空き</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">空き</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">空き</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">空き</a></li>
+    </ul>
+    <p class="text-center text-white">&copy; 2021 Company, Inc</p>
+  </footer>
+</div>
+{% endblock footer %}
