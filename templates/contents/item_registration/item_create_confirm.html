@@ -8,17 +8,17 @@
         <div class="row">
             <div class="col">
                 <p>アイテム名称{{ form.item_name.value }}</p>
-                <p>アイテム種類{{ form.instance.get_item_type_display }}</p>
+                <p>アイテム種類{{ form.item_type.value }}</p>
                 <p>季節{{ form.instance.get_season_display }}</p>
                 <p>シーン{{ form.instance.get_occasion_display }}</p>
                 <p>購入金額{{ form.pricing.value | intcomma }}円</p>
                 <p>購入日{{ form.purchase_date.value }}</p>
                 <p>クローゼット{{ form.closet.value }}</p>
-                <p>アイテムカラー{{ form.instance.get_item_color_display }}</p>
+                <p>アイテムカラー{{ form.item_color.value }}</p>
                 <p>ブランド{{ form.item_brand.value }}</p>
                 <p>購入場所{{ form.purchase_place.value }}</p>
                 <p>お気に入り度{{ form.instance.get_favorite_level_display }}</p>
-                <p>{{ form.instance.get_item_importance_display }}</p>
+                <p>大事さ{{ form.instance.get_item_importance_display }}</p>
                 <p>メモ{{ form.memo.value }}</p>
             </div>
         </div>

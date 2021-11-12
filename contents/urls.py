@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import (itemcreateview, itemcreatecompleteview)
+from .views import ( itemcreateview, itemcreatecompleteview
+)
 
 urlpatterns = [
     path('item-create/', itemcreateview, name='item_create'),
