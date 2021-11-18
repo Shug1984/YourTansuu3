@@ -5,9 +5,9 @@
 <div class="container">
     {{ form.errors }}
     <form action='' method='POST'>{% csrf_token %}
-        <legend>クローゼット登録</legend>
+        <legend>アイテム種類登録</legend>
         {% bootstrap_form form %}
-        {% bootstrap_button button_type="submit" content="クローゼット名を登録する" %}
+        {% bootstrap_button button_type="submit" content="アイテム種類を登録する" %}
     </form>
     <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
 </div>

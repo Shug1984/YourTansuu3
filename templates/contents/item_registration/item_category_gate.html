@@ -1,0 +1,14 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'item_type_create' %}" class="btn btn-outline-primary">アイテム種類の新規登録</a>
+    <a href="{% url 'item_color_create' %}" class="btn btn-outline-primary">アイテムカラーの新規登録</a>
+    <a href="{% url 'item_brand_create' %}" class="btn btn-outline-primary">ブランドの新規登録</a>
+    <a href="{% url 'purchase_place_create' %}" class="btn btn-outline-primary">購入場所の新規登録</a>
+    <a href="{% url 'closet_create' %}" class="btn btn-outline-primary">クローゼットの新規登録</a>
+    <a href="{% url 'home' %}" type="submit">ホームに戻る</a>
+</div>
+
+{% endblock content %}

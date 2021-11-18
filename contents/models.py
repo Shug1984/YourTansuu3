@@ -12,7 +12,7 @@ ITEM_IMPORTANCE_CHOICES = [(1,'捨てれる'),(2,'悩む'),(3,'普通'),(4,'ま�
 class Closet(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
-    closet_name = models.CharField(verbose_name='クローゼット名', max_length=255)
+    closet_name = models.CharField(verbose_name='クローゼット名', max_length=255, unique=True)
 
     class Meta:
         ordering =['closet_name']
@@ -23,7 +23,7 @@ class Closet(models.Model):
 class ItemType(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
-    item_type = models.CharField(verbose_name='アイテム種類', max_length=255)
+    item_type = models.CharField(verbose_name='アイテム種類', max_length=255, unique=True)
 
     def __str__(self):
         return self.item_type
@@ -31,7 +31,7 @@ class ItemType(models.Model):
 class ItemColor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
-    item_color = models.CharField(verbose_name='アイテムカラー', max_length=255)
+    item_color = models.CharField(verbose_name='アイテムカラー', max_length=255, unique=True)
 
     def __str__(self):
         return self.item_color
@@ -39,7 +39,7 @@ class ItemColor(models.Model):
 class ItemBrand(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
-    item_brand = models.CharField(verbose_name='ブランド', max_length=255)
+    item_brand = models.CharField(verbose_name='ブランド', max_length=255, unique=True)
 
     def __str__(self):
         return self.item_brand
@@ -47,7 +47,7 @@ class ItemBrand(models.Model):
 class PurchasePlace(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
-    purchase_place = models.CharField(verbose_name='購入場所', max_length=255)
+    purchase_place = models.CharField(verbose_name='購入場所', max_length=255, unique=True)
 
     def __str__(self):
         return self.purchase_place
@@ -55,14 +55,14 @@ class PurchasePlace(models.Model):
 
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
-    item_type = models.ForeignKey(ItemType, verbose_name='アイテム種類', max_length=255, default=None, on_delete=models.PROTECT)
-    item_color = models.ForeignKey(ItemColor, verbose_name='アイテム色', max_length=20, default=None, on_delete=models.PROTECT)
-    item_brand = models.ForeignKey(ItemBrand, verbose_name='ブランド', max_length=150, default=None, on_delete=models.PROTECT)
-    purchase_place = models.ForeignKey(PurchasePlace, verbose_name = '購入場所', max_length=255, default=None, on_delete=models.PROTECT)
-    closet_name = models.ForeignKey(Closet, verbose_name = 'クローゼット名', max_length=255, default=None, on_delete=models.PROTECT)
+    item_type = models.ForeignKey(ItemType, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    item_color = models.ForeignKey(ItemColor, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    item_brand = models.ForeignKey(ItemBrand, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    purchase_place = models.ForeignKey(PurchasePlace, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    closet = models.ForeignKey(Closet, on_delete=models.PROTECT, blank=True, null=True, default=None)
     season = models.CharField(verbose_name = '季節', max_length=10, choices = SEASON_CHOICES, default='spring')
     occasion = models.CharField(verbose_name = 'シーン', max_length=30, choices = OCCASION_CHOICES, default='daily_use')
-    item_name = models.CharField(verbose_name = 'アイテム名称', max_length=300)
+    item_name = models.CharField(verbose_name = 'アイテム名称', max_length=300, unique=True)
     purchase_date = models.DateTimeField(verbose_name = '購入日', blank=True, null=True)
     pricing = models.IntegerField(verbose_name = '購入価格(円)', )
     item_image = models.ImageField(verbose_name = 'アイテム画像', upload_to='contens/item_images', blank = True, null=True)
@@ -78,6 +78,3 @@ class Item(models.Model):
     
     def __str__(self):
         return self.item_name
-
-
-# Create your models here.

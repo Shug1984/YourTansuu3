@@ -124,3 +124,10 @@ MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'images')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.MyUser'
+
+ITEM_TYPE_MAX = 15
+ITEM_COLOR_MAX = 15
+ITEM_BRAND_MAX = 15
+PURCHASE_PLACE_MAX = 15
+CLOSET_NAME_MAX = 30
+

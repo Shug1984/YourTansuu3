@@ -4,19 +4,30 @@
 
 
 {% block content %}
-<h1>トップページです</h1>
-<div class="b-example-divider"></div>
-<div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1 class="display-4 fw-bold">YourTansuu3</h1>
-    <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">あなたは自分のクローゼットに何が入っているか、完璧に覚えていますか？<br>
-        Yourtansuu3を使ってクローゼットの中身を把握して、節約、エコ、SDGs貢献を<br>
-        一緒に目指しましょう。</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg px-4 me-sm-3">新規ユーザー登録</a>
-            <a href="{% url 'login' %}" class="btn btn-secondary btn-lg px-4 me-sm-3">ログイン</a>
+<div class="d-flex flex-column flex-root">
+    <div class="d-flex flex-column flex-column-fluid">
+        <div class="d-flex flex-row-fluid flex-column flex-column-fluid text-center p-10 py-lg-20">
+            <a href="{% url 'top' %}" class="pt-lg-20 mb-2">
+                <img alt="top_logo" src="{% static 'static_images/samurai.jpg' %}" class="h-100px w-300px margin-2px" />
+            </a>
+            <!--end::Logo-->
+            <!--begin::Wrapper-->
+            <div class="text-center">
+                <!--begin::Logo-->
+                <h1 class="fw-bolder fs-2qx text-dark mb-7">Welcome to YourTansuu3!</h1>
+                <!--end::Logo-->
+                <!--begin::Message-->
+                <div class="fw-bold fs-2 text-gray-400 mb-15">あなたは自分のクローゼットに何が入っているか、完璧に覚えていますか？<br>
+                    Yourtansuu3を使ってクローゼットの中身を把握して、節約、エコ、SDGs貢献を一緒に目指しましょう。</p>
+                </div>
+                <!--end::Message-->
+                <!--begin::Link-->
+                <a href="{% url 'signup' %}" class="btn btn-lg btn-primary">新規ユーザー登録</a>
+                <a href="{% url 'login' %}" class="btn btn-lg btn-info">ログイン</a>
+                <!--end::Link-->
+            </div>
+            <!--end::Wrapper-->
         </div>
-    </div>
-</div>
+        <!--end::Content-->
 {% endblock content %}
 
