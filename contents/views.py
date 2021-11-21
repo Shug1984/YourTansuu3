@@ -1,5 +1,8 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from .models import (Item, Closet, ItemType, ItemColor, ItemBrand, PurchasePlace, SEASON_CHOICES, OCCASION_CHOICES, ITEM_IMPORTANCE_CHOICES, FAVORITE_LEVEL_CHOICES)
 from .forms import (ItemTypeCreateForm, ItemColorCreateForm, ItemBrandCreateForm, PurchasePlaceCreateForm, ClosetCreateForm, ItemCreateForm)
@@ -7,6 +10,7 @@ from .forms import (ItemTypeCreateForm, ItemColorCreateForm, ItemBrandCreateForm
 
 @login_required
 def item_type_CreateView(request):
+    item_type_list = ItemType.objects.filter(user_id = request.user)
     if request.method == 'POST':
         form = ItemTypeCreateForm(request.POST)
         if form.is_valid():
@@ -16,7 +20,7 @@ def item_type_CreateView(request):
             return redirect('item_type_create_complete')
     else:
         form = ItemTypeCreateForm()
-    return render(request,'contents/item_category_registration/item_type_create.html', {'form':form})
+    return render(request,'contents/item_category_registration/item_type_create.html', {'form':form, "item_type_list":item_type_list})
 
 
 @login_required
@@ -26,6 +30,7 @@ def item_type_CreateCompleteView(request):
 
 @login_required
 def item_color_CreateView(request):
+    item_color_list = ItemColor.objects.filter(user_id = request.user)
     if request.method == 'POST':
         form = ItemColorCreateForm(request.POST)
         if form.is_valid():
@@ -35,7 +40,7 @@ def item_color_CreateView(request):
             return redirect('item_color_create_complete')
     else:
         form = ItemColorCreateForm()
-    return render(request,'contents/item_category_registration/item_color_create.html', {'form':form})
+    return render(request,'contents/item_category_registration/item_color_create.html', {'form':form, "item_color_list":item_color_list })
 
 
 @login_required
@@ -45,6 +50,7 @@ def item_color_CreateCompleteView(request):
 
 @login_required
 def item_brand_CreateView(request):
+    item_brand_list = ItemBrand.objects.filter(user_id = request.user)
     if request.method == 'POST':
         form = ItemBrandCreateForm(request.POST)
         if form.is_valid():
@@ -54,7 +60,7 @@ def item_brand_CreateView(request):
             return redirect('item_brand_create_complete')
     else:
         form = ItemBrandCreateForm()
-    return render(request,'contents/item_category_registration/item_brand_create.html', {'form':form})
+    return render(request,'contents/item_category_registration/item_brand_create.html', {'form':form, "item_brand_list":item_brand_list })
 
 
 @login_required
@@ -64,6 +70,7 @@ def item_brand_CreateCompleteView(request):
 
 @login_required
 def purchase_place_CreateView(request):
+    purchase_place_list = PurchasePlace.objects.filter(user_id = request.user)
     if request.method == 'POST':
         form = PurchasePlaceCreateForm(request.POST)
         if form.is_valid():
@@ -73,7 +80,7 @@ def purchase_place_CreateView(request):
             return redirect('purchase_place_create_complete')
     else:
         form = PurchasePlaceCreateForm()
-    return render(request,'contents/item_category_registration/purchase_place_create.html', {'form':form})
+    return render(request,'contents/item_category_registration/purchase_place_create.html', {'form':form, "purchase_place_list": purchase_place_list })
 
 
 @login_required
@@ -83,6 +90,7 @@ def purchase_place_CreateCompleteView(request):
 
 @login_required
 def closet_CreateView(request):
+    closet_list = Closet.objects.filter(user_id = request.user)
     if request.method == 'POST':
         form = ClosetCreateForm(request.POST)
         if form.is_valid():
@@ -92,12 +100,17 @@ def closet_CreateView(request):
             return redirect('closet_create_complete')
     else:
         form = ClosetCreateForm()
-    return render(request,'contents/closet_registration/closet_create.html', {'form':form})
+    return render(request,'contents/closet_registration/closet_create.html', {'form':form, "closet_list":closet_list })
 
 
 @login_required
 def closet_CreateCompleteView(request):
     return render(request, 'contents/closet_registration/closet_create_complete.html')
+
+
+@login_required
+def item_category_GateView(request):
+    return render(request, 'contents/item_registration/item_category_gate.html')
 
 
 @login_required
@@ -126,8 +139,21 @@ def item_CreateCompleteView(request):
 
 
 @login_required
-def item_category_GateView(request):
-    return render(request, 'contents/item_registration/item_category_gate.html')
+def item_ListView(request):
+    item_list = Item.objects.filter(user_id = request.user)
+    today = datetime.date.today()
+
+    paginator = Paginator(item_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/item_list/item_list.html', {'page_object': page_object,'today':today, "paginator":paginator })
+
+
+
+
+
+
 
 
 

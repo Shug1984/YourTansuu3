@@ -9,6 +9,32 @@
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="クローゼット名を登録する" %}
     </form>
+</div>
+<div class="container">
+    {% if closet_list %}
+    <p>以下のクローゼットが登録されています。{{ closet_list.count }}件/15件</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>クローゼット名</th>
+                <th>設定日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in closet_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ field.closet_name }}</td>
+                <td>{{ field.create_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>クローゼットが設定されていません</p>
+    {% endif %}
+    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-info space_top" type="submit">前ページに戻る</a>
     <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
 </div>
 {% endblock content %}

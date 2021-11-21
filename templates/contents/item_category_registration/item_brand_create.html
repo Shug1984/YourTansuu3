@@ -7,8 +7,34 @@
     <form action='' method='POST'>{% csrf_token %}
         <legend>ブランド登録</legend>
         {% bootstrap_form form %}
-        {% bootstrap_button button_type="submit" content="ブランドを登録する" %}
+        {% bootstrap_button button_type="submit" content="新しいブランドを登録する" %}
     </form>
+</div>
+<div class="container">
+    {% if item_brand_list %}
+    <p>以下のブランドが登録されています。{{ item_brand_list.count }}件/15件</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>ブランド名</th>
+                <th>設定日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in item_brand_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ field.item_brand }}</td>
+                <td>{{ field.create_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>ブランドは登録されていません</p>
+    {% endif %}
+    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-info space_top" type="submit">前ページに戻る</a>
     <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
 </div>
 {% endblock content %}
