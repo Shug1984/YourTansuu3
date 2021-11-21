@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
         self.fields['date_of_birth'].widget = forms.SelectDateWidget(years=years)
     
     password1 = forms.CharField(label='パスワード', widget=forms.PasswordInput(render_value=True))
-    password2 = forms.CharField(label='パスワード確認', widget=forms.PasswordInput(render_value=True))
+    password2 = forms.CharField(label='パスワード確認用', widget=forms.PasswordInput(render_value=True))
 
     class Meta:
         model = MyUser
@@ -21,9 +21,12 @@ class UserCreationForm(forms.ModelForm):
         fields = ('email','password1','password2','last_name','first_name','last_kana','first_kana','zip_code','prefecture','city_name',
         'street_name','building_name', 'tel', 'date_of_birth', 'gender', 'personal_image')
 
-        labels = {'email':'メールアドレス','password1':'パスワード','password2':'パスワード確認','last_name':'姓','first_name':'名','last_kana':'姓(カナ)','first_kana':'名(カナ)',
-        'zip_code':'郵便番号','prefecture':'都道府県','city_name':'市町村','street_name':'丁目・番地','building_name':'建物名', 'tel':'電話番号', 'date_of_birth':'生年月日', 
-        'gender':'性別', 'personal_image':'画像'}
+        labels = {'email':'メールアドレス','password1':'パスワード','password2':'パスワード確認用','last_name':'名前(姓)','first_name':'名前(名)','last_kana':'フリガナ(姓)','first_kana':'フリガナ(名)',
+        'zip_code':'郵便番号','prefecture':'都道府県','city_name':'市町村','street_name':'丁目・番地','building_name':'建物名・部屋番号', 'tel':'電話番号', 'date_of_birth':'生年月日', 
+        'gender':'性別', 'personal_image':'プロフィール画像'}
+
+        widgets = {
+            }
     
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

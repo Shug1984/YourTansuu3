@@ -2,11 +2,23 @@
 {%load static django_bootstrap5 %}
 
 {% block content %}
-<h1>登録完了</h1>
 <div class="container">
-    <h2 class='title'>新規登録を完了しました</h2>
-    <div style="text-align: center;">
-        <a href="{% url 'login' %}" class="btn btn-outline-primary">ログイン</a>
-    </div>
-</div>
+    <body id="kt_body" class="auth-bg">
+		<div class="d-flex flex-column flex-root">
+			<div class="d-flex flex-column flex-column-fluid">
+				<div class="d-flex flex-row-fluid flex-column flex-column-fluid text-center p-10 py-lg-20">
+					<a href="{% url 'home' %}" class="pt-lg-20 mb-12">
+						<img alt="Logo" src="{% static 'static_images/samurai.jpg' %}" class="h-40px" />
+					</a>
+					<div class="text-center">
+						<h1 class="fw-bolder fs-2qx text-dark mb-7">Welcome to YourTansuu3!!!</h1>
+						<div class="fw-bold fs-2 text-gray-400 mb-15">ご登録ありがとうございます。さっそくログインをしてみましょう。
+						</div>
+						<a href="{% url 'login' %}" class="btn btn-lg btn-primary">ログインする</a>
+					</div>
+				</div>
+				<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-150px min-h-lg-350px" style="background-image: url(assets/media/illustrations/sketchy-1/7.png)"></div>
+			</div>
+		</div>
+
 {% endblock content %}

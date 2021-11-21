@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container">
-    <p style="margin-top: 10px;">ログイン中のユーザーは{{ request.user.last_name }}　{{ request.user.first_name }}</p>
+    <p style="margin-top: 10px;">ログイン中のユーザーは{{ request.user.last_name }}　{{ request.user.first_name }}です。{{ request.user }}</p>
     <div class="row g-0">
         <!--begin::Col-->
         <div class="col-md-6 mb-10">

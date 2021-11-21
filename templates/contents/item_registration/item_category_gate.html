@@ -3,12 +3,71 @@
 
 {% block content %}
 <div class="container">
-    <a href="{% url 'item_type_create' %}" class="btn btn-outline-primary">アイテム種類の新規登録</a>
-    <a href="{% url 'item_color_create' %}" class="btn btn-outline-primary">アイテムカラーの新規登録</a>
-    <a href="{% url 'item_brand_create' %}" class="btn btn-outline-primary">ブランドの新規登録</a>
-    <a href="{% url 'purchase_place_create' %}" class="btn btn-outline-primary">購入場所の新規登録</a>
-    <a href="{% url 'closet_create' %}" class="btn btn-outline-primary">クローゼットの新規登録</a>
-    <a href="{% url 'home' %}" type="submit">ホームに戻る</a>
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">クローゼットの新規作成</h3>
+            <div class="card-toolbar">
+                <a href="{% url 'closet_create' %}" class="btn btn-primary btn-light">クローゼットの新規登録</a>
+            </div>
+        </div>
+        <div class="card-body">
+        クローゼットを登録してバーチャルなタンスを作成してアイテムを管理しましょう。一つのクローゼットには30件のアイテムを登録できます。</div>
+        <div class="card-footer">
+            仮置きフッター(何かに使えるかな。。。)</div>
+    </div>
 </div>
-
+<div class="container">
+    <div class="accordion" id="kt_accordion_1">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
+                アイテム種類の新規設定</button>
+            </h2>
+            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    「ジャケット」、「ズボン」、「上着」、「パーカー」などの分類を事前登録することでアイテム登録がしやすくなり、データ分析の精度も上がります。<br>
+                     アイテム種類の登録は最大15件まで可能です。
+                     <a href="{% url 'item_type_create' %}" class="btn btn-primary">アイテム種類の新規登録</a>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
+                アイテムカラーの新規設定</button>
+            </h2>
+            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    「赤」、「青」、「黒」、「白」などお気に入りの色を登録してアイテム登録の効率をあげましょう。
+                    <a href="{% url 'item_color_create' %}" class="btn btn-primary">アイテムカラーの新規登録</a>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
+                ブランドの新規設定</button>
+            </h2>
+            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    お気に入りのブランド、よく購入するブランドを登録しましょう。
+                    <a href="{% url 'item_brand_create' %}" class="btn btn-primary">ブランドの新規登録</a>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
+                購入場所の新規登録
+            </button>
+            </h2>
+            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                よく利用する購入場所を登録しておきましょう。
+                <a href="{% url 'purchase_place_create' %}" class="btn btn-primary">購入場所の新規登録</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

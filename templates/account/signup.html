@@ -1,19 +1,109 @@
 {% extends 'base.html' %}
-{%load static django_bootstrap5 %}
+{%load static django_bootstrap5 extra_tags %}
 
 {% block content %}
-<h1>トップページです</h1>
-
 <div class="container">
-  <h2 class='title'>新規ユーザー登録</h2>
-    <form action='' method='POST' enctype="multipart/form-data" novalidate>{% csrf_token %}
-      {% bootstrap_form form %}
-      <input type='hidden' name='action' value='confirm'>
-      <input type="hidden" id="id_personal_image_base64" name="personal_image_base64" />
-      {% bootstrap_button button_type="submit" content="登録する" %}
-    </form>
-    <a href="{% url 'top' %}" class="btn btn-outline-primary" style="margin-top: 10px;" type="submit">トップに戻る</a>
+<div class="d-flex flex-column flex-lg-row-fluid py-2">
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto">
+      <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" action='' method='POST' enctype="multipart/form-data" novalidate>{% csrf_token %} 
+        <div class="mb-10 text-center">
+          <h1 class="text-dark mb-3">新規アカウント登録</h1>
+          <div class="text-gray-400 fw-bold fs-4">アカウントをお持ちの方は 
+            <a href="{% url 'login' %}" class="link-primary fw-bolder">ログイン</a></div>
+        </div>     
+        <div class="row fv-row mb-7">
+          <div class="fv-row mb-7">
+            <label for="{{ form.email.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.email.label_tag }}</label>
+            {{ form.email | addcss_signup:"form-control form-control-lg form-control-solid"}}
+          </div>
+          <div class="mb-10 fv-row" data-kt-password-meter="true">
+            <div class="mb-1">
+              <label for="{{ form.password1.id_for_label }}"  class="form-label fw-bolder text-dark fs-6">{{ form.password1.label_tag }}</label>
+              <div class="position-relative mb-3">
+                {{ form.password1 | addcss_signup:"form-control form-control-lg form-control-solid"}}
+                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                  <i class="bi bi-eye-slash fs-2"></i>
+                  <i class="bi bi-eye fs-2 d-none"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="fv-row mb-5">
+            <label for="{{ form.password2.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.password2.label_tag }}</label>
+            {{ form.password2 | addcss_signup:"form-control form-control-lg form-control-solid"}}
+          </div>
+          <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+          <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+          </div>
+        </div>
+        <div class="row fv-row mb-7">
+
+        <div class="col-xl-6">
+          <label for="{{ form.last_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_name.label_tag }}</label>
+          {{ form.last_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-6">
+          <label for="{{ form.first_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_name.label_tag }}</label>
+          {{ form.first_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-6">
+          <label for="{{ form.last_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_kana.label_tag }}</label>
+          {{ form.last_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-6">
+          <label for="{{ form.first_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_kana.label_tag }}</label>
+          {{ form.first_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-6">
+          <label for="{{ form.zip_code.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.zip_code.label_tag }}</label>
+          {{ form.zip_code | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-6">
+          <label for="{{ form.prefecture.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.prefecture.label_tag }}</label>
+          {{ form.prefecture | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-8">
+          <label for="{{ form.city_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.city_name.label_tag }}</label>
+          {{ form.city_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-4">
+          <label for="{{ form.street_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.street_name.label_tag }}</label>
+          {{ form.street_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-12">
+          <label for="{{ form.building_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.building_name.label_tag }}</label>
+          {{ form.building_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-12">
+          <label for="{{ form.tel.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.tel.label_tag }}</label>
+          {{ form.tel | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-12">
+          <label for="{{ form.date_of_birth.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.date_of_birth.label_tag }}</label>
+          {{ form.date_of_birth | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-12">
+          <label for="{{ form.gender.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.gender.label_tag }}</label>
+          {{ form.gender | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <div class="col-xl-12">
+          <label for="{{ form.personal_image_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.personal_image.label_tag }}</label>
+          {{ form.personal_image | addcss_signup:"form-control form-control-lg form-control-solid"}}
+        </div>
+        <input type='hidden' name='action' value='confirm'>
+        <input type="hidden" id="id_personal_image_base64" name="personal_image_base64" />
+        <input type="submit" class="btn btn-primary" style="margin-top: 10px;" value='登録する'>
+      </form>
+    </div>
+  </div>
 </div>
+</div>
+
 
 <script>
   function upload_img() {
