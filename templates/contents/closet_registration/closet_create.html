@@ -12,13 +12,15 @@
 </div>
 <div class="container">
     {% if closet_list %}
-    <p>以下のクローゼットが登録されています。{{ closet_list.count }}件/15件</p>
-    <table class="table">
+    <h4 style="margin-top: 10px;">以下のクローゼットが作成されています。{{ closet_list.count }}件/30件</h4>
+    <table class="table table-rounded table-striped border gy-3 gs-3">
         <thead>
-            <tr>
+            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
                 <th>No.</th>
                 <th>クローゼット名</th>
                 <th>設定日</th>
+                <th>編集する</th>
+                <th>削除する</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,8 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ field.closet_name }}</td>
                 <td>{{ field.create_date }}</td>
+                <td><a href="{% url 'closet_update' field.pk %}" class="btn btn-sm btn-primary" type="submit">編集する</a></td>
+                <td><a href="{% url 'closet_delete' field.pk %}" class="btn btn-sm btn-primary" type="submit">削除する</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -34,7 +38,6 @@
     {% else %}
     <p>クローゼットが設定されていません</p>
     {% endif %}
-    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-info space_top" type="submit">前ページに戻る</a>
-    <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
+    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-primary" type="submit">前ページに戻る</a>
 </div>
 {% endblock content %}

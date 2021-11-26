@@ -104,7 +104,5 @@ class ItemCreateForm(forms.ModelForm):
             'season': forms.RadioSelect(choices=SEASON_CHOICES),
             'occasion': forms.RadioSelect(choices=OCCASION_CHOICES),
             'purchase_date': forms.SelectDateWidget(years = [x for x in range(2000,2040)], months = MONTHS),
-            'favorite_level': forms.RadioSelect(choices = FAVORITE_LEVEL_CHOICES ),
-            'item_importance': forms.RadioSelect(choices = ITEM_IMPORTANCE_CHOICES),
         }
 

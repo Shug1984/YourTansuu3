@@ -1,0 +1,13 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize extra_tags_contents %}
+
+{% block content %}
+<div class="container">
+    <h4 style="margin-top: 10px; margin-bottom: 10px;">ブランドの登録内容を変更する</h4>
+    <form action ='' method='POST'>{% csrf_token %}
+        {{ form.item_brand | addcss_item_create:"form-control form-control-solid" }}
+        <button class="btn btn-md btn-danger" style="margin-top: 5px;" type="submit">更新する</button>
+    </form>
+    <a href="{% url 'item_brand_create' %}" class="btn btn-md btn-primary" style="margin-top: 5px;" type="submit">前のページに戻る</a><br>
+</div>
+{% endblock content %}

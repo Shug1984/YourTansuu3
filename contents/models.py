@@ -55,10 +55,10 @@ class PurchasePlace(models.Model):
 
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
-    item_type = models.ForeignKey(ItemType, on_delete=models.PROTECT, blank=True, null=True, default=None)
-    item_color = models.ForeignKey(ItemColor, on_delete=models.PROTECT, blank=True, null=True, default=None)
-    item_brand = models.ForeignKey(ItemBrand, on_delete=models.PROTECT, blank=True, null=True, default=None)
-    purchase_place = models.ForeignKey(PurchasePlace, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    item_type = models.ForeignKey(ItemType, on_delete=models.SET_NULL, blank=True, null=True, default=None)
+    item_color = models.ForeignKey(ItemColor, on_delete=models.SET_NULL, blank=True, null=True, default=None)
+    item_brand = models.ForeignKey(ItemBrand, on_delete=models.SET_NULL, blank=True, null=True, default=None)
+    purchase_place = models.ForeignKey(PurchasePlace, on_delete=models.SET_NULL, blank=True, null=True, default=None)
     closet = models.ForeignKey(Closet, on_delete=models.PROTECT, blank=True, null=True, default=None)
     season = models.CharField(verbose_name = '季節', max_length=10, choices = SEASON_CHOICES, default='spring')
     occasion = models.CharField(verbose_name = 'シーン', max_length=30, choices = OCCASION_CHOICES, default='daily_use')

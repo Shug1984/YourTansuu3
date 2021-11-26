@@ -1,0 +1,39 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+
+{% block content %}
+<div class="container">
+    <legend class="text_center space_top space_bottom">アパレル情報詳細</legend>
+    <div class="item-info" style="margin-top: 100px; color: rgb(33, 25, 136);">
+        <h4 class="space_top space_bottom">{{ object_item.item_name }}</h4>
+    </div>
+    <table class="table table-lg">
+        <thead>
+            <tr>
+                <th>アイテム種類</th>
+                <th>季節</th>
+                <th>シーン</th>
+                <th>アイテムカラー</th>
+                <th>ブランド</th>
+                <th>購入日</th>
+                <th>購入価格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ object_item.item_type }}</td>
+                <td>{{ object_item.get_season_display }}</td>
+                <td>{{ object_item.get_occasion_display }}</td>
+                <td>{{ object_item.item_color }}</td>
+                <td>{{ object_item.item_brand }}</td>
+                <td>{{ object_item.purchase_date | date:"Y年m月d日(D)"}}</td>
+                <td>{{ object_item.pricing | intcomma }}円</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{% url 'item_delete' object_item.pk %}" type="submit" class="btn btn-primary">アイテムを削除する</a>
+    <a href="{% url 'item_update' object_item.pk %}" type="submit" class="btn btn-primary">アイテムを編集する</a>
+    <a href="{% url 'home' %}" type="submit" class="btn btn-primary">ホームに戻る</a>
+</div>
+{% endblock content %}

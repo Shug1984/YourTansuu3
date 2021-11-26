@@ -1,0 +1,9 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <h4 style="margin-top: 10px; margin-bottom: 10px;">アイテムカラーの登録内容を変更しました</h4>
+    <a href="{% url 'item_color_create' %}" class="btn btn-md btn-primary" type="submit">アイテムカラーの管理画面で確認する</a><br>
+</div>
+{% endblock content %}

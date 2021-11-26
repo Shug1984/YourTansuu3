@@ -3,60 +3,62 @@
 
 {% block content %}
 <div class="container">
-    <h1>登録アイテム一覧</h1>
     <div class="container">
-        <h7>登録アイテム総数：{{ paginator.count }}件</h7><br>
-        <h7>今日は{{ today | date:"Y年m月d日(D)" }}です</h7>
-    </div>
-    <div class="container">
-        {% if page_object %}
+        <h1>登録アイテム一覧</h1>
         <div class="container">
-            <table class="table table-lg">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>アイテム名称</th>
-                        <th>種類</th>
-                        <th>シーン</th>
-                        <th>カラー</th>
-                        <th>購入日</th>
-                        <th>購入価格</th>
-                        <th>詳細ページ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for field in page_object %}
-                    <tr>
-                        <td>{{ forloop.counter0 | add:page_object.start_index }}</td>
-                        <td>{{ field.item_name }}</td>
-                        <td>{{ field.get_item_type_display }}</td>
-                        <td>{{ field.get_occasion_display }}</td>
-                        <td>{{ field.get_item_color_display}}</td>
-                        <td>{{ field.purchase_date| date:"Y年m月d日(D)" }}</td>
-                        <td>{{ field.pricing | intcomma }}円</td>
-                        <td><a href="#"button class="btn btn-sm btn-primary" type="submit">詳細ページへ</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                {% else %}
-                <p>まだアイテムが登録されていません</p>
-                {% endif %}
-            </table>
+            <h7>登録アイテム総数：{{ paginator.count }}件</h7><br>
+            <h7>今日は{{ today | date:"Y年m月d日(D)" }}です</h7>
         </div>
-  </div>
-  <div class="pagination">
-      <span class="step-links">
-          {% if page_object.has_previous %}
-          <a href="?page=1">&laquo; 1ページ目に戻る</a>
-          <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
-          {% endif %}
-          <span class="current">
-              ページ {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
-          </span>
-          {% if page_object.has_next %}
-          <a href="?page={{ page_object.next_page_number }}">次のページ</a>
-          <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
-          {% endif %}
+        <div class="container">
+            {% if page_object %}
+            <div class="table-responsive">
+                <table class="table table-stripped gy-3 gs-3">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                            <th class="min-w-10px">No.</th>
+                            <th class="min-w-10px">アイテム名称</th>
+                            <th class="min-w-10px">種類</th>
+                            <th class="min-w-10px">シーン</th>
+                            <th class="min-w-10px">カラー</th>
+                            <th class="min-w-10px">購入日</th>
+                            <th class="min-w-10px">購入価格</th>
+                            <th class="min-w-10px">詳細ページ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for field in page_object %}
+                        <tr>
+                            <td>{{ forloop.counter0 | add:page_object.start_index }}</td>
+                            <td>{{ field.item_name }}</td>
+                            <td>{{ field.item_type }}</td>
+                            <td>{{ field.get_occasion_display }}</td>
+                            <td>{{ field.item_color }}</td>
+                            <td>{{ field.purchase_date| date:"Y年m月d日(D)" }}</td>
+                            <td>{{ field.pricing | intcomma }}円</td>
+                            <td><a href="{% url 'item_detail' field.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細へ</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% else %}
+                    <p>まだアイテムが登録されていません</p>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_object.has_previous %}
+            <a href="?page=1">&laquo; 1ページ目に戻る</a>
+            <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+            {% endif %}
+        <span class="current">
+            ページ {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
+        </span>
+        {% if page_object.has_next %}
+        <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+        <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+        {% endif %}
         </span>
     </div>
 </div>

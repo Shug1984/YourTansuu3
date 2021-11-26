@@ -29,6 +29,41 @@ def item_type_CreateCompleteView(request):
 
 
 @login_required
+def item_type_UpdateView(request,pk):
+    object_item = ItemType.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ItemTypeCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('item_type_update_complete')
+    else:
+        form = ItemTypeCreateForm(instance = object_item)
+    return render(request, 'contents/item_category_edit/item_type_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def item_type_UpdateCompleteView(request):
+    return render(request, 'contents/item_category_edit/item_type_update_complete.html')
+
+
+@login_required
+def item_type_DeleteView(request,pk):
+    object_item = ItemType.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('item_type_delete_complete')
+    
+    else:
+        return render(request, 'contents/item_category_edit/item_type_delete.html',{'object_item':object_item})
+
+
+@login_required
+def item_type_Delete_CompleteView(request):
+    return render(request, 'contents/item_category_edit/item_type_delete_complete.html')   
+
+
+@login_required
 def item_color_CreateView(request):
     item_color_list = ItemColor.objects.filter(user_id = request.user)
     if request.method == 'POST':
@@ -46,6 +81,41 @@ def item_color_CreateView(request):
 @login_required
 def item_color_CreateCompleteView(request):
     return render(request, 'contents/item_category_registration/item_color_complete.html')
+
+
+@login_required
+def item_color_UpdateView(request,pk):
+    object_item = ItemColor.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ItemColorCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('item_color_update_complete')
+    else:
+        form = ItemColorCreateForm(instance = object_item)
+    return render(request, 'contents/item_category_edit/item_color_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def item_color_UpdateCompleteView(request):
+    return render(request, 'contents/item_category_edit/item_color_update_complete.html')
+
+
+@login_required
+def item_color_DeleteView(request,pk):
+    object_item = ItemColor.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('item_color_delete_complete')
+    
+    else:
+        return render(request, 'contents/item_category_edit/item_color_delete.html',{'object_item':object_item})
+
+
+@login_required
+def item_color_Delete_CompleteView(request):
+    return render(request, 'contents/item_category_edit/item_color_delete_complete.html')   
 
 
 @login_required
@@ -69,6 +139,41 @@ def item_brand_CreateCompleteView(request):
 
 
 @login_required
+def item_brand_UpdateView(request,pk):
+    object_item = ItemBrand.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ItemBrandCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('item_brand_update_complete')
+    else:
+        form = ItemBrandCreateForm(instance = object_item)
+    return render(request, 'contents/item_category_edit/item_brand_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def item_brand_UpdateCompleteView(request):
+    return render(request, 'contents/item_category_edit/item_brand_update_complete.html')
+
+
+@login_required
+def item_brand_DeleteView(request,pk):
+    object_item = ItemBrand.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('item_brand_delete_complete')
+    
+    else:
+        return render(request, 'contents/item_category_edit/item_brand_delete.html',{'object_item':object_item})
+
+
+@login_required
+def item_brand_Delete_CompleteView(request):
+    return render(request, 'contents/item_category_edit/item_brand_delete_complete.html')   
+
+
+@login_required
 def purchase_place_CreateView(request):
     purchase_place_list = PurchasePlace.objects.filter(user_id = request.user)
     if request.method == 'POST':
@@ -89,6 +194,41 @@ def purchase_place_CreateCompleteView(request):
 
 
 @login_required
+def purchase_place_UpdateView(request,pk):
+    object_item = PurchasePlace.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = PurchasePlaceCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('purchase_place_update_complete')
+    else:
+        form = PurchasePlaceCreateForm(instance = object_item)
+    return render(request, 'contents/item_category_edit/purchase_place_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def purchase_place_UpdateCompleteView(request):
+    return render(request, 'contents/item_category_edit/purchase_place_update_complete.html')
+
+
+@login_required
+def purchase_place_DeleteView(request,pk):
+    object_item = PurchasePlace.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('purchase_place_delete_complete')
+    
+    else:
+        return render(request, 'contents/item_category_edit/purchase_place_delete.html',{'object_item':object_item})
+
+
+@login_required
+def purchase_place_Delete_CompleteView(request):
+    return render(request, 'contents/item_category_edit/purchase_place_delete_complete.html')   
+
+
+@login_required
 def closet_CreateView(request):
     closet_list = Closet.objects.filter(user_id = request.user)
     if request.method == 'POST':
@@ -106,6 +246,42 @@ def closet_CreateView(request):
 @login_required
 def closet_CreateCompleteView(request):
     return render(request, 'contents/closet_registration/closet_create_complete.html')
+
+
+@login_required
+def closet_UpdateView(request,pk):
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ClosetCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('closet_update_complete')
+    else:
+        form = ClosetCreateForm(instance = object_item)
+    return render(request, 'contents/closet_edit/closet_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def closet_UpdateCompleteView(request):
+    return render(request, 'contents/closet_edit/closet_update_complete.html')
+
+
+@login_required
+def closet_DeleteView(request,pk):
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('closet_delete_complete')
+    
+    else:
+        return render(request, 'contents/closet_edit/closet_delete.html',{'object_item':object_item})
+
+
+@login_required
+def closet_Delete_CompleteView(request):
+    return render(request, 'contents/closet_edit/closet_delete_complete.html')   
+
 
 
 @login_required
@@ -150,6 +326,47 @@ def item_ListView(request):
     return render(request, 'contents/item_list/item_list.html', {'page_object': page_object,'today':today, "paginator":paginator })
 
 
+@login_required
+def item_DetailView(request, pk):
+    object_item = Item.objects.get(user_id= request.user, pk=pk)
+    return render(request, 'contents/item_list/item_detail.html', {'object_item':object_item})
+
+
+@login_required
+def item_Updateview(request, pk):
+    object_item = Item.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ItemCreateForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('item_detail', pk=pk)
+    else:
+        form = ItemCreateForm(instance = object_item)
+    return render(request, 'contents/item_edit/item_update.html',{'form':form, 'object_item':object_item})
+
+
+@login_required
+def item_Update_CompleteView(request):
+    pass
+
+
+@login_required
+def item_DeleteView(request, pk):
+    object_item = Item.objects.filter(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button', '') == 'confirm':
+            return render(request, 'contents/item_edit/item_delete_confirm.html', {'object_item':object_item})
+        else:
+            object_item.delete()
+        return redirect('item_delete_complete')
+    
+    else:
+        return render(request, 'contents/item_edit/item_delete.html', {'object_item':object_item})
+
+
+@login_required
+def item_Delete_CompleteView(request):
+    return render(request, 'contents/item_edit/item_delete_complete.html')   
 
 
 

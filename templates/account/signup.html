@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%load static django_bootstrap5 extra_tags %}
+{%load static django_bootstrap5 extra_tags_account %}
 
 {% block content %}
 <div class="container">
@@ -15,7 +15,7 @@
         <div class="row fv-row mb-7">
           <div class="fv-row mb-7">
             <label for="{{ form.email.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.email.label_tag }}</label>
-            {{ form.email | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            {{ form.email | addcss_signup:"form-control form-control-lg form-control-solid" }}
           </div>
           <div class="mb-10 fv-row" data-kt-password-meter="true">
             <div class="mb-1">

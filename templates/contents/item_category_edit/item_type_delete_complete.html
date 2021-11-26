@@ -1,0 +1,11 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <h3>アイテム種類の削除</h3>
+    <h7>削除しました</h7>
+    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-info">クローゼット管理画面に戻る</a>
+<a href="{% url 'home' %}" class="btn btn-md btn-info">ホームに戻る</a>
+</div>
+{% endblock content %}

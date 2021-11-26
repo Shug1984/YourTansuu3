@@ -1,0 +1,17 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <h3>アイテムカラーの削除</h3>
+    <form action='' method="POST">{% csrf_token %}
+        {% for item in object_item %}
+        <ul>
+            <li>{{ item.item_color }}</li>
+        </ul>
+        {% endfor %}
+        <button type = "submit" name = "button"  value = "confirm">削除します</button>
+    </form>
+<a href="{% url 'home' %}" class="btn btn-md btn-info">ホームに戻る</a>
+</div>
+{% endblock content %
