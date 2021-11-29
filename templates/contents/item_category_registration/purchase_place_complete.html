@@ -3,7 +3,8 @@
 
 {% block content %}
 <div class="container">
-    <h4>購入場所登録完了</h4>
-    <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
+    <h4>購入場所の登録完了</h4>
+    <a href="{% url 'purchase_place_create' %}" class="btn btn-md btn-danger" type="submit">続けて、購入場所を登録する</a>
+    <a href="{% url 'home' %}" class="btn btn-md btn-primary" type="submit">ホームに戻る</a>
 </div>
 {% endblock content %}

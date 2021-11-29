@@ -3,41 +3,115 @@
 
 {% block content %}
 <div class="container">
-    <legend>入力内容確認</legend>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <p>アイテム名称{{ form.item_name.value }}</p>
-                <p>アイテム種類{{ form.item_type.value }}</p>
-                <p>季節{{ form.instance.get_season_display }}</p>
-                <p>シーン{{ form.instance.get_occasion_display }}</p>
-                <p>購入金額{{ form.pricing.value | intcomma }}円</p>
-                <p>購入日{{ form.purchase_date.value }}</p>
-                <p>クローゼット{{ form.closet.value }}</p>
-                <p>アイテムカラー{{ form.item_color.value }}</p>
-                <p>ブランド{{ form.item_brand.value }}</p>
-                <p>購入場所{{ form.purchase_place.value }}</p>
-                <p>お気に入り度{{ form.instance.get_favorite_level_display }}</p>
-                <p>大事さ{{ form.instance.get_item_importance_display }}</p>
-                <p>メモ{{ form.memo.value }}</p>
+    <div class="d-flex flex-column flex-lg-row-fluid">
+        <div class="d-flex flex-center flex-column flex-column-fluid">     
+            <div class="w-md-1000px p-10 p-lg-4 mx-auto">
+                <div class="mb-3 text-center">
+                    <h1 class="text-dark">新規アイテム登録内容の確認</h1>
             </div>
-        </div>
-    </div>
-    <form action = '.' method="post">
-        {% csrf_token %}
-        {% for field in form %}
-        {{ field.as_hidden }}
-        {% endfor %}
-        <input type = 'hidden' name = 'action' value='complete'>
-        <button class="btn btn-md btn-primary space_bottom">登録する</button>
-    </form>
-    <form action = '.' method="post">
-        {% csrf_token %}
-        {% for field in form %}
-        {{ field.as_hidden }}
-        {% endfor %}
-        <input type = 'hidden' name = 'action' value='input'>
-        <button class="btn btn-md btn-info">入力ページに戻る</button>
-    </form>
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <p>エラーが発生しました。</p>
+                {% endif %}
+                {% for field, error_list in form.errors.items %}
+                <p>{{ error_list }}</p>{% endfor %}
+            </div>
+            <div class="row fv-row mb-5">
+                <div class="col-xl-12">
+                  <label class="form-label fw-bolder text-dark fs-6">{{ form.item_name.label_tag }}</label>
+                  <p class="form-control form-control-solid">{{ form.item_name.value }}</p>
+                </div>
+                <div class="col-xl-12">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.purchase_date.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.purchase_date.value }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.pricing.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.pricing.value | intcomma }}円</p>
+                </div>
+                <div class="col-xl-6">
+                        <p>アイテム画像</p>
+                        <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
+                        {{ form.item_image.value }}
+                        {% if form.item_image.value == None %}
+                        <img src="{% static 'static_images/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+                        {% endif %}
+                    </div>
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_image.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.item_image.value }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.season.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.instance.get_season_display }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.occasion.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.instance.get_occasion_display }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.favorite_level.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.instance.get_favorite_level_display }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_importance.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.instance.get_item_importance_display }}</p>
+                </div>
+                <div class="col-xl-12">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.closet.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.closet.value }}</p>
+                </div>
+                <div class="col-xl-4">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_type.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.item_type.value }}</p>
+                </div>
+                <div class="col-xl-4">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_color.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.item_color.value }}</p>
+                </div>
+                <div class="col-xl-4">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_brand.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.item_brand.value }}</p>
+                </div>
+                <div class="col-xl-12">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.purchase_place.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.purchase_place.value }}</p>
+                </div>
+                <div class="col-xl-12">
+                    <label class="form-label fw-bolder text-dark fs-6">{{ form.memo.label_tag }}</label>
+                    <p class="form-control form-control-solid">{{ form.memo.value }}</p>
+                </div>
+                <form action = '.' method="post">{% csrf_token %}
+                    {% for field in form %}
+                    {{ field.as_hidden }}
+                    {% endfor %}
+                    <input type = 'hidden' name = 'action' value='complete'>
+                    <input type="hidden" name="item_image_base64" value="{{ item_image_base64 }}" />
+                    <button class="btn btn-md btn-danger" style="margin-bottom: 7px;">登録する</button>
+                </form>
+                <form action = '.' method="post">{% csrf_token %}
+                    {% for field in form %}
+                    {{ field.as_hidden }}
+                    {% endfor %}
+                    <input type = 'hidden' name = 'action' value='input'>
+                    <button class="btn btn-md btn-primary">入力ページに戻る</button>
+                </form>
 </div>
 {% endblock content %}
+
+<script>
+  function upload_img() {
+    const file = this.files[0];
+    const reader = new FileReader();
+    const item_image_base64 = document.getElementById('id_item_image_base64');
+
+    reader.addEventListener("load", function () {
+      item_image_base64.value = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  document.getElementById('id_item_image').addEventListener("change", upload_img);
+</script>
+

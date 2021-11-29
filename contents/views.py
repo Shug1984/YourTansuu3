@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 
 from .models import (Item, Closet, ItemType, ItemColor, ItemBrand, PurchasePlace, SEASON_CHOICES, OCCASION_CHOICES, ITEM_IMPORTANCE_CHOICES, FAVORITE_LEVEL_CHOICES)
 from .forms import (ItemTypeCreateForm, ItemColorCreateForm, ItemBrandCreateForm, PurchasePlaceCreateForm, ClosetCreateForm, ItemCreateForm)
+from .utils import decode_base64_file
 
 
 @login_required
@@ -298,9 +299,10 @@ def item_Createview(request):
             if action == 'input':
                 return render(request, 'contents/item_registration/item_create.html', {'form':form})
             elif action == 'confirm':
-                return render(request,'contents/item_registration/item_create_confirm.html',{'form':form})
+                return render(request,'contents/item_registration/item_create_confirm.html',{'form':form, 'item_image_base64': request.POST.get('item_image_base64'),})
             else:
                 item = form.save(commit=False)
+                item.item_image = decode_base64_file(request.POST.get('item_image'), request.POST.get('item_image_base64'))
                 item.user = request.user
                 item.save()
                 return redirect('item_create_complete')

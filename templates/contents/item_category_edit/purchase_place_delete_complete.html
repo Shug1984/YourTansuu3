@@ -1,0 +1,9 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize %}
+
+{% block content %}
+<div class="container">
+    <h4 style="margin-top: 10px; margin-bottom: 10px;">購入場所を削除しました</h4>
+    <a href="{% url 'purchase_place_create' %}" class="btn btn-md btn-primary">購入場所管理画面で確認する</a>
+</div>
+{% endblock content %}

@@ -3,9 +3,7 @@
 
 {% block content %}
 <div class="container">
-    <h3>アイテム種類の削除</h3>
-    <h7>削除しました</h7>
-    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-info">クローゼット管理画面に戻る</a>
-<a href="{% url 'home' %}" class="btn btn-md btn-info">ホームに戻る</a>
+    <h4 style="margin-top: 10px; margin-bottom: 10px;">アイテム種類を削除しました</h4>
+    <a href="{% url 'item_type_create' %}" class="btn btn-md btn-primary">アイテム種類管理画面で確認する</a>
 </div>
 {% endblock content %}

@@ -65,7 +65,7 @@ class Item(models.Model):
     item_name = models.CharField(verbose_name = 'アイテム名称', max_length=300, unique=True)
     purchase_date = models.DateTimeField(verbose_name = '購入日', blank=True, null=True)
     pricing = models.IntegerField(verbose_name = '購入価格(円)', )
-    item_image = models.ImageField(verbose_name = 'アイテム画像', upload_to='contens/item_images', blank = True, null=True)
+    item_image = models.ImageField(verbose_name = 'アイテム画像', upload_to='contents/item_images', blank = True, null=True)
     memo = models.TextField(verbose_name = 'メモ', blank=True, null=True)
     favorite_level = models.IntegerField(verbose_name = 'お気に入り度', choices = FAVORITE_LEVEL_CHOICES, default=None, blank=True, null=True)
     item_importance = models.IntegerField(verbose_name = '大事さ', choices = ITEM_IMPORTANCE_CHOICES, default=None, blank=True, null=True)
@@ -74,7 +74,7 @@ class Item(models.Model):
     
 
     class Meta:
-        ordering = ['item_name']
+        ordering = ['create_date']
     
     def __str__(self):
         return self.item_name

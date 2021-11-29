@@ -3,7 +3,8 @@
 
 {% block content %}
 <div class="container">
-    <h4>アイテム種類登録完了</h4>
-    <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a>
+    <h4>クローゼット作成完了</h4>
+    <a href="{% url 'closet_create' %}" class="btn btn-md btn-danger" type="submit">続けて、クローゼットを作成する</a>
+    <a href="{% url 'item_category_gate' %}" class="btn btn-md btn-primary" type="submit">クローゼット管理画面に戻る</a>
 </div>
 {% endblock content %}

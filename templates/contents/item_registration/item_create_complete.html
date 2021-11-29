@@ -4,7 +4,8 @@
 {% block content %}
 <div class="container">
   <h4>アイテム登録完了</h4>
-  <a href="{% url 'home' %}" class="btn btn-outline-primary">ホームに戻る</a>
+  <a href="{% url 'item_list' %}" class="btn btn-primary">アイテム一覧で確認する</a>
+  <a href="{% url 'item_create' %}" class="btn btn-primary">続けて、次のアイテムを登録する</a>
 </div>
 
 {% endblock content %}
