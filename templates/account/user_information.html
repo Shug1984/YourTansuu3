@@ -2,49 +2,71 @@
 {%load static django_bootstrap5 humanize %}
 
 {% block content %}
-
-<div class="container" style="margin-bottom: 10px;">
-  <h1>ユーザー情報です</h1>
-  <div class="container">
-    <form action="", method="get">
-      <div class="card card-solid">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch flex-column">
-            <div class="card bg-light d-flex flex-fill">
-              <div class="card-header text-muted border-bottom-0">
-                ログイン中のユーザーの情報です
+<div class="container">
+  <div class="card mb-5 mb-xl-10" id="kt_account_settings_info" data-kt-scroll-offset="{default: 100, md: 125}">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_basic_info" aria-expanded="true" aria-controls="kt_account_basic_info">
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">ユーザー情報</h3>
+      </div>
+    </div>
+  <div id="kt_account_basic_info" class="collapse show">
+    <form id="kt_account_basic_info_form" class="form">
+      <div class="card-body border-top p-9">
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">プロフィール画像</label>
+          <div class="col-lg-8">
+            {% if user_information.personal_image %}
+            <img src="{{ user_information.personal_image.url }}" style="max-width: 300px;" />
+            {% else %}
+            <img src="{% static 'static_images/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+            {% endif %}
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">お名前</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-6 fv-row">
+                <label class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="姓">{{ user_information.last_name }} ({{ user_information.last_kana }})</label>
               </div>
-              <div class="card-body pt-0">
-                <div class="row">
-                  <div class="col-10">
-                    <h2 class="lead"><b>{{ user_information.last_name }}　{{ user_information.first_name }}</b></h2>
-                    <h2 class="lead"><b>{{ user_information.last_kana }}　{{ user_information.first_kana }}</b></h2>
-                    <p class="text-muted text-sm"><b>メールアドレス:</b> {{ user_information.email }} </p>
-                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>〒{{ user_information.zip_code }}{{ user_information.get_prefecture_display }} {{ user_information.city_name }}  {{ user_information.street_name }} {{ user_information.building_name }}</li>
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>{{ user_information.tel }}</li>
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>{{ user_information.date_of_birth | date:"Y年m月d日(D)"}}</li>
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>{{ user_information.get_gender_display }}</li>
-                    </ul>
-                  </div>
-                  <div class="col-2 text-center">
-                    {% if user_information.personal_image %}
-                    <img src="{{ user_information.personal_image.url }}" alt="user-avatar" class="img-circle img-fluid">
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="text-right">
-                  <a href="{% url 'user_update' request.user.pk %}" class="btn btn-primary">ユーザー情報を編集する</a>
-                  <a href="{% url 'password_change' request.user.pk %}" class="btn btn-primary">パスワードを変更する</a>
-                </div>
+              <div class="col-lg-6 fv-row">
+                <label class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="名">{{ user_information.first_name }}  ({{ user_information.first_kana }})</label>
               </div>
             </div>
           </div>
         </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">メールアドレス</label>
+          <div class="col-lg-8 fv-row">
+            <label class="form-control form-control-lg form-control-solid" placeholder="メールアドレス">{{ user_information.email }}</label>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">住所</label>
+          <div class="col-lg-8 fv-row">
+            <label class="form-control form-control-lg form-control-solid" placeholder="住所">〒{{ user_information.zip_code }}{{ user_information.get_prefecture_display }} {{ user_information.city_name }}  {{ user_information.street_name }} {{ user_information.building_name }}</label>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">電話番号</label>
+          <div class="col-lg-8 fv-row">
+            <label class="form-control form-control-lg form-control-solid" placeholder="TEL">{{ user_information.tel }}</label>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">生年月日</label>
+          <div class="col-lg-8 fv-row">
+            <label class="form-control form-control-lg form-control-solid" placeholder="date_of_birth">{{ user_information.date_of_birth | date:"Y年m月d日(D)"}}</label>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="text-center">
+            <a href="{% url 'user_update' request.user.pk %}" class="btn btn-primary">ユーザー情報を編集する</a>
+            <a href="{% url 'password_change' request.user.pk %}" class="btn btn-primary">パスワードを変更する</a>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 {% endblock content %}
