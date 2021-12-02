@@ -284,7 +284,6 @@ def closet_Delete_CompleteView(request):
     return render(request, 'contents/closet_edit/closet_delete_complete.html')   
 
 
-
 @login_required
 def item_category_GateView(request):
     return render(request, 'contents/item_registration/item_category_gate.html')

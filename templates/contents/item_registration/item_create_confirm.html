@@ -23,22 +23,11 @@
                 </div>
                 <div class="col-xl-12">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.purchase_date.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.purchase_date.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.purchase_date | naturalday }}</p>
                 </div>
                 <div class="col-xl-6">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.pricing.label_tag }}</label>
                     <p class="form-control form-control-solid">{{ form.pricing.value | intcomma }}円</p>
-                </div>
-                <div class="col-xl-6">
-                        <p>アイテム画像</p>
-                        <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
-                        {{ form.item_image.value }}
-                        {% if form.item_image.value == None %}
-                        <img src="{% static 'static_images/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
-                        {% endif %}
-                    </div>
-                    <label class="form-label fw-bolder text-dark fs-6">{{ form.item_image.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.item_image.value }}</p>
                 </div>
                 <div class="col-xl-6">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.season.label_tag }}</label>
@@ -58,28 +47,39 @@
                 </div>
                 <div class="col-xl-12">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.closet.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.closet.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.closet }}</p>
                 </div>
                 <div class="col-xl-4">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.item_type.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.item_type.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.item_type }}</p>
                 </div>
                 <div class="col-xl-4">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.item_color.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.item_color.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.item_color }}</p>
                 </div>
                 <div class="col-xl-4">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.item_brand.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.item_brand.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.item_brand }}</p>
                 </div>
                 <div class="col-xl-12">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.purchase_place.label_tag }}</label>
-                    <p class="form-control form-control-solid">{{ form.purchase_place.value }}</p>
+                    <p class="form-control form-control-solid">{{ form.cleaned_data.purchase_place }}</p>
                 </div>
                 <div class="col-xl-12">
                     <label class="form-label fw-bolder text-dark fs-6">{{ form.memo.label_tag }}</label>
                     <p class="form-control form-control-solid">{{ form.memo.value }}</p>
                 </div>
+                <div class="col-xl-6">
+                    <p>アイテム画像</p>
+                    <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
+                    {{ form.item_image.value }}
+                    {% if form.item_image.value == None %}
+                    <img src="{% static 'static_images/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+                    {% endif %}
+                </div>
+                <label class="form-label fw-bolder text-dark fs-6">{{ form.item_image.label_tag }}</label>
+                <p class="form-control form-control-solid">{{ form.item_image.value }}</p>
+            </div>
                 <form action = '.' method="post">{% csrf_token %}
                     {% for field in form %}
                     {{ field.as_hidden }}

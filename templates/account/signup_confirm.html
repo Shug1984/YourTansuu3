@@ -10,12 +10,12 @@
             <div class="mb-10 text-center">
               <h1 class="text-dark mb-3">新規アカウント登録、入力内容の確認</h1>
               <div class="text-gray-400 fw-bold fs-4">以下の内容を確認してください 
-                <a href="{% url 'signup' %}" class="link-primary fw-bolder">修正される方はこちら</a></div>
+              </div>
             </div>     
             <div class="row fv-row mb-7">
               <div class="fv-row mb-7">
                 <label for="{{ form.email.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.email.label_tag }}</label>
-                {{ form.email | addcss_signup:"form-control form-control-lg form-control-solid"}}
+                <p class="form-control form-control-solid">{{ form.email.value }}</p>
               </div>
               <div class="mb-10 fv-row" data-kt-password-meter="true">
                 <div class="mb-1">
@@ -45,55 +45,59 @@
     
             <div class="col-xl-6">
               <label for="{{ form.last_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_name.label_tag }}</label>
-              {{ form.last_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.last_name.value }}</p>
             </div>
             <div class="col-xl-6">
               <label for="{{ form.first_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_name.label_tag }}</label>
-              {{ form.first_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.first_name.value }}</p>
             </div>
             <div class="col-xl-6">
               <label for="{{ form.last_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_kana.label_tag }}</label>
-              {{ form.last_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.last_kana.value }}</p>
             </div>
             <div class="col-xl-6">
               <label for="{{ form.first_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_kana.label_tag }}</label>
-              {{ form.first_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.first_kana.value }}</p>
             </div>
             <div class="col-xl-6">
               <label for="{{ form.zip_code.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.zip_code.label_tag }}</label>
-              {{ form.zip_code | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.zip_code.value }}</p>
             </div>
             <div class="col-xl-6">
               <label for="{{ form.prefecture.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.prefecture.label_tag }}</label>
-              {{ form.prefecture | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.prefecture.value }}</p>
             </div>
             <div class="col-xl-8">
               <label for="{{ form.city_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.city_name.label_tag }}</label>
-              {{ form.city_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.city_name.value }}</p>
             </div>
             <div class="col-xl-4">
               <label for="{{ form.street_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.street_name.label_tag }}</label>
-              {{ form.street_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.street_name.value }}</p>
             </div>
             <div class="col-xl-12">
               <label for="{{ form.building_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.building_name.label_tag }}</label>
-              {{ form.building_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.building_name.value }}</p>
             </div>
             <div class="col-xl-12">
               <label for="{{ form.tel.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.tel.label_tag }}</label>
-              {{ form.tel | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.tel.value }}</p>
             </div>
             <div class="col-xl-12">
               <label for="{{ form.date_of_birth.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.date_of_birth.label_tag }}</label>
-              {{ form.date_of_birth | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.cleaned_data.date_of_birth | naturalday }}</p>
             </div>
             <div class="col-xl-12">
               <label for="{{ form.gender.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.gender.label_tag }}</label>
-              {{ form.gender | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <p class="form-control form-control-solid">{{ form.instance.get_gender_display }}</p>
             </div>
             <div class="col-xl-12">
               <label for="{{ form.personal_image_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.personal_image.label_tag }}</label>
-              {{ form.personal_image | addcss_signup:"form-control form-control-lg form-control-solid"}}
+              <img src="{{ personal_image_base64 }}" style="max-width: 300px;"/>
+              {{ form.personal_image.value }}
+              {% if form.personal_image.value == None %}
+              <img src="{% static 'static_images/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+              {% endif %}
             </div>
             <form action='.' method="post" enctype="multipart/form-data">{% csrf_token %}
                 {% for field in form %}

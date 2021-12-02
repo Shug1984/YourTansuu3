@@ -1,13 +1,92 @@
 {% extends 'account/account_base.html' %}
-{%load static django_bootstrap5 humanize %}
+{%load static django_bootstrap5 humanize extra_tags_account %}
 
 {% block content %}
 <div class="container">
-    <form action ='' method='POST' enctype="multipart/form-data">
-        <h2>ユーザー情報の編集</h2>{% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button button_type="submit" content="更新する" %}
-    </form>
-<a href="{% url 'user_information' request.user.pk %}" class="btn btn-outline-primary" type="submit">ユーザー情報に戻る</a>
-</div>
+    <div class="d-flex flex-column flex-lg-row-fluid py-2">
+      <div class="d-flex flex-center flex-column flex-column-fluid">
+        <div class="w-lg-600px p-10 p-lg-15 mx-auto">
+          <form class="form w-100" id="kt_sign_up_form" action='' method='POST' enctype="multipart/form-data">{% csrf_token %} 
+            <div class="mb-10 text-center">
+              <h1 class="text-dark mb-3">ユーザー情報の編集</h1>
+              <div class="text-gray-400 fw-bold fs-4" style="margin-bottom: 7px;">以下のフォームの内容を変更してください</div>
+            <div class="row fv-row mb-7">
+            <div class="col-xl-6">
+              <label for="{{ form.last_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_name.label_tag }}</label>
+              {{ form.last_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-6">
+              <label for="{{ form.first_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_name.label_tag }}</label>
+              {{ form.first_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-6">
+              <label for="{{ form.last_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.last_kana.label_tag }}</label>
+              {{ form.last_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-6">
+              <label for="{{ form.first_kana.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.first_kana.label_tag }}</label>
+              {{ form.first_kana | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-6">
+              <label for="{{ form.zip_code.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.zip_code.label_tag }}</label>
+              {{ form.zip_code | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-6">
+              <label for="{{ form.prefecture.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.prefecture.label_tag }}</label>
+              {{ form.prefecture | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-8">
+              <label for="{{ form.city_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.city_name.label_tag }}</label>
+              {{ form.city_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-4">
+              <label for="{{ form.street_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.street_name.label_tag }}</label>
+              {{ form.street_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-12">
+              <label for="{{ form.building_name.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.building_name.label_tag }}</label>
+              {{ form.building_name | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-12">
+              <label for="{{ form.tel.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.tel.label_tag }}</label>
+              {{ form.tel | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-12">
+              <label for="{{ form.date_of_birth.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.date_of_birth.label_tag }}</label>
+              {{ form.date_of_birth | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-12">
+              <label for="{{ form.gender.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.gender.label_tag }}</label>
+              {{ form.gender | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <div class="col-xl-12">
+              <label for="{{ form.personal_image_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.personal_image.label_tag }}</label>
+              {{ form.personal_image | addcss_signup:"form-control form-control-lg form-control-solid"}}
+            </div>
+            <input type='hidden' name='action' value='confirm'>
+            <input type="hidden" id="id_personal_image_base64" name="personal_image_base64" />
+            <input type="submit" class="btn btn-primary" style="margin-top: 10px;" value='更新する'>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    <script>
+      function upload_img() {
+        const file = this.files[0];
+        const reader = new FileReader();
+        const item_image_base64 = document.getElementById('id_personal_image_base64');
+    
+        reader.addEventListener("load", function () {
+          item_image_base64.value = reader.result;
+        }, false);
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+      document.getElementById('id_personal_image').addEventListener("change", upload_img);
+    </script>
 {% endblock content %}
