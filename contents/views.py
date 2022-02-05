@@ -241,7 +241,13 @@ def closet_CreateView(request):
             return redirect('closet_create_complete')
     else:
         form = ClosetCreateForm()
-    return render(request,'contents/closet_registration/closet_create.html', {'form':form, "closet_list":closet_list })
+    
+    item_list = Item.objects.filter(user_id = request.user)
+    if request.GET.get('closet'):
+        closet = request.GET['closet']
+        item_list = item_list.filter(closet=closet)
+    
+    return render(request,'contents/closet_registration/closet_create.html', {'form':form, "closet_list":closet_list,"item_list":item_list })
 
 
 @login_required
@@ -318,6 +324,10 @@ def item_CreateCompleteView(request):
 @login_required
 def item_ListView(request):
     item_list = Item.objects.filter(user_id = request.user)
+    if request.GET.get('closet'):
+        closet = request.GET['closet']
+        item_list = item_list.filter(closet=closet)
+
     today = datetime.date.today()
 
     paginator = Paginator(item_list, 10)
@@ -337,8 +347,9 @@ def item_DetailView(request, pk):
 def item_Updateview(request, pk):
     object_item = Item.objects.get(user_id = request.user, pk=pk)
     if request.method == 'POST':
-       form = ItemCreateForm(request.POST, instance=object_item)
+       form = ItemCreateForm(request.POST, request.FILES, instance=object_item)
        if form.is_valid():
+           form.item_image = decode_base64_file(request.POST.get('item_image'), request.POST.get('item_image_base64'))
            form.save()
            return redirect('item_detail', pk=pk)
     else:
@@ -367,7 +378,21 @@ def item_DeleteView(request, pk):
 
 @login_required
 def item_Delete_CompleteView(request):
-    return render(request, 'contents/item_edit/item_delete_complete.html')   
+    return render(request, 'contents/item_edit/item_delete_complete.html')
+
+
+@login_required
+def closet_ListView(request):
+    object_list = Closet.objects.filter(user_id = request.user)
+
+    paginator = Paginator(object_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/closet_list/closet_list.html', {'page_object': page_object})
+
+
+
 
 
 

@@ -7,7 +7,7 @@ from .views import (
     item_brand_DeleteView, item_brand_Delete_CompleteView, purchase_place_DeleteView, purchase_place_Delete_CompleteView, closet_DeleteView, closet_Delete_CompleteView,
     closet_DeleteView, closet_Delete_CompleteView, item_type_UpdateView, item_type_UpdateCompleteView, item_color_UpdateView, item_color_UpdateCompleteView,
     item_brand_UpdateView, item_brand_UpdateCompleteView, purchase_place_UpdateView, purchase_place_UpdateCompleteView, closet_UpdateView, closet_UpdateCompleteView,
-    item_Updateview, item_Update_CompleteView
+    item_Updateview, item_Update_CompleteView, closet_ListView
 )
 
 urlpatterns = [
@@ -50,4 +50,5 @@ urlpatterns = [
     path('item-detail/<int:pk>/', item_DetailView, name='item_detail'),
     path('item-delete/<int:pk>/', item_DeleteView, name='item_delete'),
     path('item-delete-complete/', item_Delete_CompleteView, name='item_delete_complete'),
+    path('closet-list/', closet_ListView, name='closet_list'),
 ]

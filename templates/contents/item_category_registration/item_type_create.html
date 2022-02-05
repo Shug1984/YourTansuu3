@@ -28,7 +28,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ field.item_type }}</td>
-            <td>{{ field.create_date }}</td>
+            <td>{{ field.create_date | date:"Y年m月d日(D)" }}</td>
             <td><a href="{% url 'item_type_update' field.pk %}" class="btn btn-sm btn-primary" type="submit">編集する</a></td>
             <td><a href="{% url 'item_type_delete' field.pk %}" class="btn btn-sm btn-primary" type="submit">削除する</a></td>
         </tr>

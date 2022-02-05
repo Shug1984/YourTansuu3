@@ -58,7 +58,33 @@
         </div>
         <!--begin::Col-->
         <div class="col-md-12 mb-10">
-            <div class="bg-light bg-opacity-50 rounded-3 p-10 mx-md-5 h-md-100">
+            <div class="bg-light bg-opacity-100 rounded-3 p-10 mx-md-5 h-md-100">
+                <div class="d-flex flex-center w-60px h-60px rounded-3 bg-light-warning bg-opacity-90 mb-5">
+                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs026.svg-->
+                    <span class="svg-icon svg-icon-warning svg-icon-3x">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path opacity="0.3" d="M7 20.5L2 17.6V11.8L7 8.90002L12 11.8V17.6L7 20.5ZM21 20.8V18.5L19 17.3L17 18.5V20.8L19 22L21 20.8Z" fill="black" />
+                            <path d="M22 14.1V6L15 2L8 6V14.1L15 18.2L22 14.1Z" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <h1 class="mb-5">あなたのクローゼット一覧</h1>
+                <div class="fs-4 text-gray-600 py-3">仮置きメッセージ仮置きメッセージ仮置きメッセージ仮置きメッセージ仮置きメッセージ仮置きメッセージ</div>
+                <a href="{% url 'closet_list' %}" class="btn btn-primary">クローゼットの一覧を表示する
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                <span class="svg-icon ms-2 svg-icon-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                        <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black" />
+                    </svg>
+                </span>
+                <!--end::Svg Icon--></a>
+            </div>
+        </div>
+        <!--end::Col-->
+        <div class="col-md-12 mb-10">
+            <div class="bg-light bg-opacity-100 rounded-3 p-10 mx-md-5 h-md-100">
                 <div class="d-flex flex-center w-60px h-60px rounded-3 bg-light-warning bg-opacity-90 mb-5">
                     <!--begin::Svg Icon | path: icons/duotune/abstract/abs026.svg-->
                     <span class="svg-icon svg-icon-warning svg-icon-3x">
@@ -82,7 +108,7 @@
                 <!--end::Svg Icon--></a>
             </div>
         </div>
-        <!--end::Col-->
+       
     </div>
 </div>
 {% endblock content %}

@@ -19,6 +19,12 @@ class Closet(models.Model):
     
     def __str__(self):
         return self.closet_name
+    
+    @property
+    def item_count(self):
+        item_count= Item.objects.filter(closet=self).count()
+        return item_count
+
 
 class ItemType(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE, null=True)
@@ -78,3 +84,8 @@ class Item(models.Model):
     
     def __str__(self):
         return self.item_name
+    
+    @property
+    def closet_count(self):
+        closet_count = Closet.objetcs.filter(closet_name=self).count()
+        return closet_count

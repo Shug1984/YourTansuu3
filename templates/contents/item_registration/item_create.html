@@ -38,7 +38,7 @@
               <label for="{{ form.season.id_for_label }}" class="form-label fw-bolder text-dark fs-6">{{ form.season.label_tag }}</label>
               {% for radiobutton_season in form.season %}
               <label class="btn btn-primary" style="margin-top: 8px; margin-bottom: 3px;">
-              {{ radiobutton_season  }}
+              {{ radiobutton_season }}
               </label>
               {% endfor %}
             </div>
@@ -90,9 +90,11 @@
           </div>
         </div>
       </div>
+      <div style="text-align: center;">
       <input type = 'hidden' name = 'action' value = 'confirm'>
       <input type="hidden" id="id_item_image_base64" name="item_image_base64"/>
       <button type="submit" class="btn btn-danger" style="margin-bottom: 7px;">新規登録</button>
+      </div>
     </form>
   </div>   
 </div>

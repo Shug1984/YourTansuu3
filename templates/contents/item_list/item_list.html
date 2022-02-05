@@ -40,17 +40,18 @@
     </table>
     <div class="pagination">
         <span class="step-links">
-            {% if page_object.has_previous %}
-            <a href="?page=1">&laquo; 1ページ目に戻る</a>
-            <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
-            {% endif %}
-        <span class="current">
-            ページ {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
-        </span>
-        {% if page_object.has_next %}
-        <a href="?page={{ page_object.next_page_number }}">次のページ</a>
-        <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
-        {% endif %}
+          {% if page_object.has_previous %}
+          <a href="?page=1">&laquo; 1ページ目に戻る</a>
+          <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+          {% endif %}
+          
+          <span class="current">
+            ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}
+          </span>
+          {% if page_object.has_next %}
+          <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+          <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+          {% endif %}
         </span>
     </div>
 </div>

@@ -1,0 +1,54 @@
+{% extends 'contents/contents_base.html' %}
+{% load static django_bootstrap5 humanize extra_tags_contents %}
+
+{% block content %}
+<div class="container">
+    <h1>クローゼット一覧</h1>
+    <p style="margin-top: 10px;">ログイン中のユーザーは{{ request.user.last_name }}　{{ request.user.first_name }}です。{{ request.user }}</p>
+    <p style="margin-top: 10px;">クローゼットの登録件数{{ page_object.closet_count }}/30件</p>
+    {% if page_object %}
+    <table class="table table-rounded table-striped border gy-3 gs-3">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>クローゼット名称:</th>
+                <th>クローゼット作成日:</th>
+                <th>アイテム登録件数:</th>
+                <th>クローゼットへ</th>
+                <th>クローゼットを削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in page_object %}
+            <tr>
+                <td>{{ forloop.counter0 | add:page_object.start_index }}</td>
+                <td>{{ item.closet_name }}</a></td>
+                <td>{{ item.create_date |  date:"Y年m月d日(D)" }}</td>
+                <td>登録されているアイテムは{{ item.item_count }}件です</td>
+                <td><a href="{% url 'item_list' %}?closet={{ item.pk }}" button class="btn btn-sm btn-primary" type="submit">クローゼットの中をみる</a></td>
+                <td><a href="{% url 'closet_delete' item.pk %}" button class="btn btn-sm btn-primary" type="submit">クローゼットを削除する</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <p>まだアイテムが登録されていません</p>
+        {% endif %}
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+          {% if page_object.has_previous %}
+          <a href="?page=1">&laquo; 1ページ目に戻る</a>
+          <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+          {% endif %}
+          
+          <span class="current">
+            ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}
+          </span>
+          {% if page_object.has_next %}
+          <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+          <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+          {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock content %}
